@@ -109,7 +109,7 @@ body::before{
 }
 
 /* Utility: a visible sample text for the bottom bar */
-.bottom-bar .label{ font-weight:600; font-size:1.02rem; letter-spacing:0.2px; }
+.bottom-bar .label{ font-weight:600; font-size:4rem; letter-spacing:0.2px; }
 
 /* Ensure images don't overflow (useful for your current index.html sample image) */
 img{ max-width:100%; height:auto; display:block; }
