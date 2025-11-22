@@ -85,6 +85,16 @@ body::before{
 	backdrop-filter: blur(6px);
 }
 
+.logo{
+    height:48px;
+    margin-right:12px;
+    position:absolute;
+    border-radius: 50%;
+	box-shadow: 0 -20px 40px rgba(4,18,12,0.4);
+}
+
+
+
 /* Decorative circle/ellipse that creates the soft beveled curve */
 .bottom-bar::before{
 	content:"";
@@ -147,6 +157,71 @@ img{ max-width:100%; height:auto; display:block; }
 @media (max-width:760px){
 	.features{ gap:14px; }
 	.feature-box{ max-width:100%; }
+}
+
+/* Middle image-text container styles */
+.image-text{
+	display:flex;
+	gap:20px;
+	align-items:center;
+	margin:20px auto 36px auto;
+	max-width:880px;
+	background: rgba(255,255,255,0.02);
+	padding:14px;
+	border-radius:12px;
+	box-shadow: 0 6px 18px rgba(6,30,22,0.04);
+	justify-content:center;
+}
+.image-text .image-wrap{ flex:0 0 220px; display:flex; align-items:center; justify-content:center; }
+.image-text .android-img{
+	width:220px; /* smaller image */
+	height:auto;
+	border-radius:8px;
+	display:block;
+	box-shadow: 0 6px 18px rgba(9,49,30,0.08);
+	border: none; /* remove visible border so background feels transparent */
+	background: transparent;
+}
+.image-text .android-img.android-img--small{ width:180px; }
+.image-text .text-wrap{ flex:1 1 auto; }
+.image-text h2{ margin:0 0 8px 0; color:#063a28; }
+.image-text p{ margin:0; color:#0a2f22; line-height:1.45; }
+
+@media (max-width:880px){
+	.image-text{ flex-direction:column; text-align:center; }
+	.image-text .image-wrap{ width:60%; max-width:360px; margin:0 auto; }
+	.image-text .android-img{ width:60%; }
+}
+
+/* Promo wrapper with yellowish gradient — less transparent so it stands out */
+.promo{
+	max-width:980px;
+	margin:28px auto 16px auto;
+	padding:18px 20px;
+	border-radius:14px;
+	/* warm/yellow gradient — fairly opaque to stand out from the overlay */
+	background: linear-gradient(90deg, rgba(255,244,179,0.96), rgba(255,230,150,0.96));
+	box-shadow: 0 10px 30px rgba(11,35,16,0.08);
+	position:relative;
+	z-index:50; /* ensure it's above the page overlay */
+}
+
+.store-btn{
+	display:inline-block;
+	margin-top:12px;
+	padding:10px 16px;
+	background:#1f8f4a; /* green CTA to match site */
+	color:white;
+	border-radius:999px;
+	text-decoration:none;
+	font-weight:600;
+	box-shadow: 0 6px 18px rgba(17,71,45,0.12);
+}
+.store-btn:hover{ filter:brightness(0.96); transform:translateY(-2px); }
+
+@media (max-width:880px){
+	.promo{ padding:14px; }
+	.store-btn{ width:80%; display:block; margin:12px auto 0 auto; text-align:center; }
 }
 
 
