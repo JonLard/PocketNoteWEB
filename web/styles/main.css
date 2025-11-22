@@ -1,0 +1,116 @@
+/* main.css — Pocket Note visual styles
+	 Adds:
+	 - light grey grid background for the page
+	 - a subtle green overlay/tint using body::before
+	 - a fixed, beveled, green-gradient bottom bar that follows scrolling
+
+	 Notes:
+	 - The bottom bar height is provided by --bar-height; body gets matching padding-bottom
+	 - The overlay is pointer-events:none so it doesn't block interaction
+*/
+
+:root{
+	--bg-color: #e9ecef; /* page base */
+	--grid-line: #d1d5d7; /* grid lines */
+	--grid-size: 36px; /* spacing between grid lines */
+	--overlay-strong: rgba(46,204,113,0.12);
+	--overlay-soft: rgba(21,163,93,0.06);
+	--bar-height: 130px;
+	--bar-gradient: linear-gradient(135deg, rgba(72,195,123,0.98), rgba(22,138,88,0.96));
+}
+
+/* Page background with subtle grey grid */
+html,body{
+	height:100%;
+}
+body{
+	margin:0;
+	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	background-color: var(--bg-color);
+	/* Two linear-gradients to make a square grid */
+	background-image:
+		linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+	background-size: var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
+	background-position: 0 0, 0 0;
+	color: #0b2b20;
+	/* Make sure content isn't hidden behind the bottom bar */
+	padding-bottom: calc(var(--bar-height) + 12px);
+	position:relative;
+}
+
+/* Soft green overlay tint that doesn't block clicks */
+body::before{
+	content:"";
+	position:fixed;
+	inset:0; /* top:0; right:0; bottom:0; left:0; */
+	pointer-events:none;
+	z-index:40;
+	/* combine a radial accent + top-to-bottom gradient for depth */
+	background-image:
+		radial-gradient(700px 400px at 10% 20%, var(--overlay-strong), transparent 25%),
+		linear-gradient(180deg, var(--overlay-strong), var(--overlay-soft));
+	mix-blend-mode: multiply;
+	opacity:0.95;
+}
+
+/* Main content helper — keeps content above overlay but under the bottom bar */
+.page-content{
+	position:relative;
+	z-index:45;
+	max-width:1100px;
+	margin:0 auto;
+	padding:32px;
+}
+
+/* Fixed beveled bottom bar */
+.bottom-bar{
+	position:fixed;
+	left:0;
+	right:0;
+	bottom:0;
+	height:var(--bar-height);
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	z-index:60; /* above overlay */
+	background: var(--bar-gradient);
+	color: white;
+	padding: 12px 20px;
+	box-shadow: 0 -10px 30px rgba(6,22,14,0.35);
+	/* create a large curved/beveled top edge */
+	border-top-left-radius: 40% 60px;
+	border-top-right-radius: 40% 60px;
+	overflow:visible;
+	backdrop-filter: blur(6px);
+}
+
+/* Decorative circle/ellipse that creates the soft beveled curve */
+.bottom-bar::before{
+	content:"";
+	position:absolute;
+	top:-70px; /* moves the ellipse up so only the top curve shows */
+	left:50%;
+	transform:translateX(-50%);
+	width:130%;
+	height:200px;
+	background: inherit;
+	filter: blur(0px);
+	border-radius:50%;
+	z-index:-1;
+	box-shadow: 0 -20px 40px rgba(4,18,12,0.4);
+}
+
+/* Small responsive tweaks */
+@media (max-width:600px){
+	:root{ --bar-height: 110px; }
+	.bottom-bar{ padding:10px; }
+	.bottom-bar::before{ top:-56px; height:160px; }
+}
+
+/* Utility: a visible sample text for the bottom bar */
+.bottom-bar .label{ font-weight:600; font-size:1.02rem; letter-spacing:0.2px; }
+
+/* Ensure images don't overflow (useful for your current index.html sample image) */
+img{ max-width:100%; height:auto; display:block; }
+
