@@ -114,3 +114,39 @@ body::before{
 /* Ensure images don't overflow (useful for your current index.html sample image) */
 img{ max-width:100%; height:auto; display:block; }
 
+/* ------------------ Feature boxes (centered) ------------------ */
+.features{
+	display:flex;
+	gap:24px;
+	justify-content:center;
+	align-items:stretch;
+	margin:36px 0 12px 0;
+	flex-wrap:wrap; /* stack on small screens */
+}
+
+.feature-box{
+	flex: 1 1 260px; /* grow, shrink, base width */
+	max-width:320px;
+	background: linear-gradient(180deg, rgba(40,167,69,0.14), rgba(24,128,72,0.06));
+	border-radius:16px;
+	padding:20px;
+	box-shadow: 0 8px 20px rgba(12,38,25,0.12), inset 0 -6px 12px rgba(255,255,255,0.03);
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	transition: transform 220ms ease, box-shadow 220ms ease;
+	border: 1px solid rgba(9,52,32,0.06);
+}
+
+.feature-box:hover{ transform: translateY(-6px); box-shadow: 0 14px 30px rgba(6,28,18,0.18); }
+
+.feature-content{ text-align:center; }
+.feature-title{ margin:0 0 6px 0; font-size:1.05rem; color: #06462b; }
+.feature-desc{ margin:0; color: #0a2f22; font-size:0.95rem; opacity:0.95; }
+
+@media (max-width:760px){
+	.features{ gap:14px; }
+	.feature-box{ max-width:100%; }
+}
+
+
