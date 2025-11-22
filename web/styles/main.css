@@ -124,6 +124,39 @@ body::before{
 /* Ensure images don't overflow (useful for your current index.html sample image) */
 img{ max-width:100%; height:auto; display:block; }
 
+/* Right-side scrolling images frame */
+.scroll-frame{
+	position:fixed;
+	top:24px;
+	right:18px;
+	width:220px; /* slightly larger */
+	bottom: calc(var(--bar-height) + 18px);
+	z-index:55;
+	pointer-events:none; /* decorative */
+}
+.scroll-inner{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	border-radius:12px;
+}
+.scroll-list{
+	display:block;
+	will-change: transform;
+}
+.scroll-list img{
+	display:block;
+	width:100%;
+	height:auto;
+	margin-bottom:28px; /* more vertical spacing for a looser layout */
+	border-radius:8px;
+	box-shadow: 0 10px 26px rgba(6,30,22,0.12);
+}
+
+@media (max-width:900px){
+	.scroll-frame{ display:none; }
+}
+
 /* ------------------ Feature boxes (centered) ------------------ */
 .features{
 	display:flex;
